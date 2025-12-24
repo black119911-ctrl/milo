@@ -13,12 +13,6 @@ class Admin {
         // Проверяем, есть ли уже услуга
         $existing = $this->getService();
 
-            // ОТЛАДКА
-        error_log("🔄 createOrUpdateService called");
-        error_log("📦 Data received: " . print_r($data, true));
-        error_log("🔍 Existing service: " . print_r($existing, true));
-
-        
         if ($existing) {
             // Обновляем существующую
             $stmt = $this->pdo->prepare("
@@ -65,30 +59,37 @@ class Admin {
     }
 
     public function createProduct($data) {
-        $stmt = $this->pdo->prepare("
-            INSERT INTO products (name, price, image, private_discount) 
-            VALUES (?, ?, ?, ?)
-        ");
+        $stmt = $this->pdo->prepare(
+            "INSERT INTO products (name, price, image, private_discount, stock, created_at) 
+            VALUES (:name, :price, :image, :private_discount, :stock, datetime('now'))"
+        );
         return $stmt->execute([
-            $data['name'],
-            $data['price'],
-            $data['image'],
-            $data['private_discount'] ?? 0
+            ':name' => $data['name'],
+            ':price' => $data['price'],
+            ':image' => $data['image'],
+            ':private_discount' => $data['private_discount'] ?? 0,
+            ':stock' => $data['stock'] ?? 1  // По умолчанию в наличии
         ]);
     }
 
     public function updateProduct($id, $data) {
-        $stmt = $this->pdo->prepare("
-            UPDATE products SET 
-            name = ?, price = ?, image = ?, private_discount = ?
-            WHERE id = ?
-        ");
+        $stmt = $this->pdo->prepare(
+            "UPDATE products 
+            SET name = :name, 
+                price = :price, 
+                image = :image, 
+                private_discount = :private_discount,
+                stock = :stock,
+                updated_at = datetime('now')
+            WHERE id = :id"
+        );
         return $stmt->execute([
-            $data['name'],
-            $data['price'],
-            $data['image'],
-            $data['private_discount'] ?? 0,
-            $id
+            ':id' => $id,
+            ':name' => $data['name'],
+            ':price' => $data['price'],
+            ':image' => $data['image'],
+            ':private_discount' => $data['private_discount'] ?? 0,
+            ':stock' => $data['stock'] ?? 1
         ]);
     }
 

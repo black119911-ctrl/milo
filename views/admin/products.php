@@ -355,34 +355,42 @@ $product = $product ?? null;
     line-height: 1;
 }
 
-.icon-plus::before { content: "+"; }
-.icon-edit::before { content: "✏️"; }
-.icon-delete::before { content: "🗑️"; }
+.icon-plus::before {
+    content: "+";
+}
+
+.icon-edit::before {
+    content: "✏️";
+}
+
+.icon-delete::before {
+    content: "🗑️";
+}
 
 /* Адаптивность */
 @media (max-width: 768px) {
     .products-page {
         padding: 15px;
     }
-    
+
     .page-header {
         flex-direction: column;
         gap: 20px;
         align-items: flex-start;
     }
-    
+
     .table-container {
         display: none;
     }
-    
+
     .products-grid {
         display: grid;
     }
-    
+
     .form-container {
         padding: 25px;
     }
-    
+
     .btn--fab {
         bottom: 20px;
         right: 20px;
@@ -395,7 +403,7 @@ $product = $product ?? null;
     .products-grid {
         display: none;
     }
-    
+
     .table-container {
         display: block;
     }
@@ -417,8 +425,13 @@ $product = $product ?? null;
 }
 
 @keyframes loading {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
 }
 
 /* Сообщение о пустом списке */
@@ -487,34 +500,55 @@ $product = $product ?? null;
 
 /* Тёмная тема */
 @media (prefers-color-scheme: dark) {
+
     .product-card,
     .table-container,
     .form-container {
         background: #1e293b;
         border-color: #334155;
     }
-    
+
     .rich-editor {
         background: #1e293b;
         color: #e2e8f0;
         border-color: #334155;
     }
-    
+
     .toolbar {
         background: #0f172a;
         border-color: #334155;
     }
-    
+
     .toolbar button {
         background: #1e293b;
         color: #e2e8f0;
         border-color: #334155;
     }
-    
+
     .existing-image img {
         background: #1e293b;
         border-color: #334155;
     }
+}
+
+/* Дополнительные стили для чекбокса */
+.checkbox-label {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.checkbox-label:hover {
+    border-color: var(--primary-green) !important;
+    background: rgba(16, 94, 52, 0.05) !important;
+}
+
+.checkbox-label input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"]:checked {
+    background-color: var(--primary-green);
 }
 </style>
 
@@ -590,8 +624,7 @@ $product = $product ?? null;
                                 <span class="icon icon-edit"></span>
                                 Редактировать
                             </a>
-                            <button onclick="deleteProduct(<?= $product['id'] ?>)" 
-                                    class="btn btn--danger btn--sm">
+                            <button onclick="deleteProduct(<?= $product['id'] ?>)" class="btn btn--danger btn--sm">
                                 <span class="icon icon-delete"></span>
                                 Удалить
                             </button>
@@ -607,9 +640,9 @@ $product = $product ?? null;
     <div class="products-grid">
         <?php foreach ($products as $product): ?>
         <div class="product-card">
-            <img src="<?= $product['image'] ?>" alt="<?= htmlspecialchars($product['name']) ?>" 
-                 class="product-card__image"
-                 onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjMTA1RTM0IiBvcGFjaXR5PSIwLjEiLz4KPHBhdGggZD0iTTgwIDgwSDg0VjkwSDgwVjgwWk02NSA4MEg2N1Y5MEg2NVY4MFpNNjAgODBINjJWOTBINjBWODBaIiBmaWxsPSIjMTA1RTM0IiBvcGFjaXR5PSIwLjUiLz4KPC9zdmc+'">
+            <img src="<?= $product['image'] ?>" alt="<?= htmlspecialchars($product['name']) ?>"
+                class="product-card__image"
+                onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjMTA1RTM0IiBvcGFjaXR5PSIwLjEiLz4KPHBhdGggZD0iTTgwIDgwSDg0VjkwSDgwVjgwWk02NSA4MEg2N1Y5MEg2NVY4MFpNNjAgODBINjJWOTBINjBWODBaIiBmaWxsPSIjMTA1RTM0IiBvcGFjaXR5PSIwLjUiLz4KPC9zdmc+'">
             <div class="product-card__content">
                 <div class="product-card__name"><?= htmlspecialchars($product['name']) ?></div>
                 <div class="product-card__meta">
@@ -672,22 +705,37 @@ $product = $product ?? null;
                 <h3 style="color: var(--primary-green); margin-bottom: 20px; font-size: 20px;">Основная информация</h3>
                 <div class="form-group">
                     <label for="name">Название товара *</label>
-                    <input type="text" id="name" name="name" 
-                           value="<?= htmlspecialchars($product['name'] ?? '') ?>"
-                           placeholder="Например: Натуральный шампунь для волос" required>
+                    <input type="text" id="name" name="name" value="<?= htmlspecialchars($product['name'] ?? '') ?>"
+                        placeholder="Например: Натуральный шампунь для волос" required>
                 </div>
 
                 <div class="form-group">
                     <label for="price">Цена (в рублях) *</label>
-                    <input type="number" id="price" name="price" value="<?= $product['price'] ?? '' ?>" 
-                           placeholder="1990" min="0" step="0.01" required>
+                    <input type="number" id="price" name="price" value="<?= $product['price'] ?? '' ?>"
+                        placeholder="1990" min="0" step="0.01" required>
                 </div>
 
                 <div class="form-group">
                     <label for="private_discount">Клубная скидка (%)</label>
                     <input type="number" id="private_discount" name="private_discount"
-                           value="<?= $product['private_discount'] ?? 0 ?>" placeholder="0" min="0" max="100" step="1">
-                    <small>Специальная скидка для участников клуба. Применяется автоматически при вводе промокода</small>
+                        value="<?= $product['private_discount'] ?? 0 ?>" placeholder="0" min="0" max="100" step="1">
+                    <small>Специальная скидка для участников клуба. Применяется автоматически при вводе
+                        промокода</small>
+                </div>
+
+                <!-- В наличии чекбокс -->
+                <div class="form-group">
+                    <label class="checkbox-label"
+                        style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 12px 16px; background: var(--light-bg); border-radius: 12px; border: 2px solid var(--border-color);">
+                        <input type="hidden" name="stock" value="0">
+                        <input type="checkbox" name="stock" value="1" id="stock"
+                            <?= isset($product['stock']) && $product['stock'] == 1 ? 'checked' : '' ?>
+                            style="width: 20px; height: 20px; accent-color: var(--primary-green);">
+                        <span style="font-weight: 600; color: var(--text-dark);">
+                            В наличии (товар отображается в каталоге)
+                        </span>
+                    </label>
+                    <small>Если не отмечено, товар будет скрыт из каталога</small>
                 </div>
             </div>
 
@@ -711,7 +759,8 @@ $product = $product ?? null;
 
             <!-- Описание и характеристики -->
             <div class="form-section">
-                <h3 style="color: var(--primary-green); margin-bottom: 20px; font-size: 20px;">Описание и характеристики</h3>
+                <h3 style="color: var(--primary-green); margin-bottom: 20px; font-size: 20px;">Описание и характеристики
+                </h3>
 
                 <!-- Описание (статья) -->
                 <div class="form-group">
@@ -722,8 +771,8 @@ $product = $product ?? null;
                         <button type="button" onclick="insertTag('<h2>', '</h2>', 'art_description')">Заголовок</button>
                         <button type="button" onclick="insertTag('<p>', '</p>', 'art_description')">Параграф</button>
                     </div>
-                    <div class="rich-editor" contenteditable="true" id="art_description_editor" 
-                         onclick="setActiveEditor('art_description')">
+                    <div class="rich-editor" contenteditable="true" id="art_description_editor"
+                        onclick="setActiveEditor('art_description')">
                         <?= $product['article_description'] ?? '' ?>
                     </div>
                     <textarea name="art_description" id="art_description" style="display:none;"></textarea>
@@ -738,7 +787,7 @@ $product = $product ?? null;
                         <button type="button" onclick="insertTag('<h2>', '</h2>', 'composition')">Заголовок</button>
                     </div>
                     <div class="rich-editor" contenteditable="true" id="composition_editor"
-                         onclick="setActiveEditor('composition')">
+                        onclick="setActiveEditor('composition')">
                         <?= $product['article_composition'] ?? '' ?>
                     </div>
                     <textarea name="composition" id="composition" style="display:none;"></textarea>
@@ -753,7 +802,7 @@ $product = $product ?? null;
                         <button type="button" onclick="insertTag('<h2>', '</h2>', 'application')">Заголовок</button>
                     </div>
                     <div class="rich-editor" contenteditable="true" id="application_editor"
-                         onclick="setActiveEditor('application')">
+                        onclick="setActiveEditor('application')">
                         <?= $product['article_application'] ?? '' ?>
                     </div>
                     <textarea name="application" id="application" style="display:none;"></textarea>
@@ -768,7 +817,7 @@ $product = $product ?? null;
                         <button type="button" onclick="insertTag('<h2>', '</h2>', 'recommendations')">Заголовок</button>
                     </div>
                     <div class="rich-editor" contenteditable="true" id="recommendations_editor"
-                         onclick="setActiveEditor('recommendations')">
+                        onclick="setActiveEditor('recommendations')">
                         <?= $product['article_recommendations'] ?? '' ?>
                     </div>
                     <textarea name="recommendations" id="recommendations" style="display:none;"></textarea>
@@ -804,7 +853,9 @@ async function deleteProduct(id) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ id: id })
+            body: JSON.stringify({
+                id: id
+            })
         });
 
         const result = await response.json();

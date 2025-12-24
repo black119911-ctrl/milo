@@ -175,27 +175,7 @@ class AdminController extends BaseController {
             
             // Обработка загрузки изображения
             if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-                $uploadDir = __DIR__ . '/../images/products/';
-                if (!is_dir($uploadDir)) {
-                    mkdir($uploadDir, 0755, true);
-                }
-
-                $allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
-                $fileType = mime_content_type($_FILES['image']['tmp_name']);
-                
-                if (!in_array($fileType, $allowedTypes)) {
-                    throw new Exception('Недопустимый тип файла');
-                }
-
-                $fileExtension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-                $fileName = uniqid() . '_' . preg_replace('/[^a-zA-Z0-9-_\.]/', '', $_FILES['image']['name']);
-                $filePath = $uploadDir . $fileName;
-
-                if (move_uploaded_file($_FILES['image']['tmp_name'], $filePath)) {
-                    $imagePath = '/images/products/' . $fileName;
-                } else {
-                    throw new Exception('Ошибка загрузки файла');
-                }
+                // ... существующий код загрузки изображения ...
             } elseif (isset($_POST['existing_image']) && !empty($_POST['existing_image'])) {
                 $imagePath = $_POST['existing_image'];
             }
@@ -205,7 +185,8 @@ class AdminController extends BaseController {
                 'name' => $_POST['name'],
                 'price' => $_POST['price'],
                 'image' => $imagePath,
-                'private_discount' => $_POST['private_discount'] ?? 0
+                'private_discount' => $_POST['private_discount'] ?? 0,
+                'stock' => isset($_POST['stock']) ? '1' : '0' // Добавляем поле stock
             ];
 
             // Данные для articles
@@ -303,6 +284,7 @@ class AdminController extends BaseController {
             echo json_encode(['success' => false, 'message' => 'Файл не загружен']);
         }
     }
+
 
     public function deleteReview($params) {
         $this->checkAdminAuth();

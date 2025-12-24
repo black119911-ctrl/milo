@@ -158,4 +158,11 @@ class Product {
         return $stmt->execute([$discount, $id]);
     }
 
+    
+    public function getAllAvailable() {
+        $stmt = $this->pdo->prepare("SELECT * FROM products WHERE stock = 1 ORDER BY id DESC");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

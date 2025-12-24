@@ -9,7 +9,9 @@ class CatalogController extends BaseController {
         
         $showBasket = $this->authenticate($params);
         $productModel = new Product($this->pdo);
-        $products = $productModel->all();
+        
+        // Получаем только товары в наличии (stock = 1)
+        $products = $productModel->getAllAvailable();
 
         // Получаем корзину из сессии
         $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
