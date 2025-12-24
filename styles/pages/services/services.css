@@ -1,0 +1,301 @@
+/* styles/pages/services/services.css */
+.section-main.cart-section {
+    padding: 80px 0;
+    background: #f8f9fa;
+    min-height: calc(100vh - 200px);
+}
+
+.consult {
+    background: white;
+    color: #333;
+    border-radius: 15px;
+    padding: 40px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.consult__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.consult__row:last-of-type {
+    border-bottom: none;
+    margin-bottom: 30px;
+}
+
+.consult__title {
+    font-size: 18px;
+    font-weight: 300;
+    color: #666;
+}
+
+.consult__value {
+    font-size: 20px;
+    font-weight: 400;
+    color: #105E34;
+}
+
+.consult__unavailable {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.consult__unavailable h2 {
+    font-size: 28px;
+    font-weight: 300;
+    margin-bottom: 20px;
+    color: #105E34;
+}
+
+.consult__unavailable p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.order__form {
+    margin-top: 30px;
+}
+
+.order__form-field {
+    margin-bottom: 25px;
+}
+
+.order__form-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.input.order__form-input {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    background: white;
+    color: #333;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.input.order__form-input:focus {
+    border-color: #105E34;
+    background: white;
+    outline: none;
+}
+
+.input.order__form-input::placeholder {
+    color: #999;
+}
+
+.order__form-submit {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.order__form-btn {
+    background: #105E34;
+    color: white;
+    padding: 16px 40px;
+    font-size: 18px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+}
+
+.order__form-btn:hover:not(:disabled) {
+    background: #0e522d;
+    transform: translateY(-2px);
+}
+
+.order__form-btn:disabled {
+    background: #cccccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+#form-message {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+.agree-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+.agree-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: #105E34;
+}
+
+.agree-checkbox label {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #333;
+}
+
+.order__form-oferta-link {
+    color: #105E34;
+    text-decoration: underline;
+}
+
+.order__form-oferta-link:hover {
+    color: #0e522d;
+}
+
+small {
+    color: #666;
+    font-size: 14px;
+}
+
+.hide {
+    display: none;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .section-main.cart-section {
+        padding: 40px 0;
+    }
+    
+    .consult {
+        padding: 30px 20px;
+        margin: 0 15px;
+    }
+    
+    .consult__row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .consult__title,
+    .consult__value {
+        width: 100%;
+        text-align: left;
+    }
+    
+    .order__form-btn {
+        width: 100%;
+    }
+    
+    .agree-checkbox {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 450px) {
+    .consult {
+        padding: 25px 15px;
+    }
+    
+    .consult__value {
+        font-size: 18px;
+    }
+    
+    .input.order__form-input {
+        padding: 12px 15px;
+    }
+}
+
+/* Стили для кнопки банка на странице услуги */
+#alfa-payment-button {
+    width: 100% !important;
+    margin: 20px 0 !important;
+}
+
+#alfa-payment__button {
+    background: linear-gradient(135deg, #27ae60, #2ecc71) !important;
+    border: none !important;
+    border-radius: 8px !important;
+    color: white !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    padding: 15px 30px !important;
+    width: 100% !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3) !important;
+}
+
+#alfa-payment__button:hover {
+    background: linear-gradient(135deg, #219653, #27ae60) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4) !important;
+}
+
+#alfa-payment__button:disabled {
+    background: #bdc3c7 !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Скрытие платежного блока */
+#alfa-payment-button.hidden {
+    display: none !important;
+}
+
+#alfa-message {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 14px;
+    margin-top: 10px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+}
+
+/* Стили для полей формы */
+.order__form-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.order__form-input:focus {
+    outline: none;
+    border-color: #4361ee;
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+}
+
+.order__form-input.error {
+    border-color: #e74c3c;
+}
+
+.order__form-input.valid {
+    border-color: #27ae60;
+}
+
+.field-error {
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 5px;
+}

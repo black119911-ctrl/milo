@@ -1,0 +1,325 @@
+my-project/
+├── controllers/
+│   ├── HomeController.php
+│   └── AboutController.php
+├── models/
+│   └── UserModel.php
+├── views/
+│   ├── home.php
+│   └── about.php
+├── config.php
+├── helpers.php
+├── routes.php
+└── index.php
+
+
+Контроллер сможет рендерить представление следующим образом:
+
+require_once 'views/home.php';
+
+СИГНАЛИЗИРОВАТЬ ОБ ОСТАТКАХ - в тг бота
+
+
+5. Middleware (Промежуточное ПО)
+Для простоты реализации промежуточного слоя можно добавить проверку авторизации перед доступом к определённым маршрутам:
+
+
+session_start(); // Начало сессии
+
+// Проверка авторизованности пользователя
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header('Location: /login');
+    exit;
+}
+
+
+6. Services/Helpers (Услуги и вспомогательные классы)
+Например, можем создать общий файл функций (helpers.php), который будет доступен во всех файлах проекта:
+
+И подключаем этот файл глобально:
+require_once 'helpers.php';
+
+
+
+/myshop/
+├── app/
+│   ├── controllers/
+│   │   ├── HomeController.php
+│   │   └── ProductController.php
+│   ├── models/
+│   │   ├── Product.php
+│   │   └── User.php
+│   └── views/
+│       ├── home/
+│       │   └── index.php
+│       └── products/
+│           ├── list.php
+│           └── view.php
+├── config/
+│   └── database.php
+├── public/
+│   ├── css/
+│   │   └── style.css
+│   ├── img/
+│   │   └── logo.png
+│   └── index.php
+├── vendor/
+│   └── composer.json
+└── .htaccess
+
+
+
+Вот пример простой архитектуры небольшого интернет-магазина на PHP с использованием MVC паттерна (Model-View-Controller), чистой реализации роутинга и минимальных зависимостей. Рассмотрим основные компоненты проекта и структуру каталогов:
+
+Структура директорий
+
+/myshop/
+├── app/
+│   ├── controllers/
+│   │   ├── HomeController.php
+│   │   └── ProductController.php
+│   ├── models/
+│   │   ├── Product.php
+│   │   └── User.php
+│   └── views/
+│       ├── home/
+│       │   └── index.php
+│       └── products/
+│           ├── list.php
+│           └── view.php
+├── config/
+│   └── database.php
+├── public/
+│   ├── css/
+│   │   └── style.css
+│   ├── img/
+│   │   └── logo.png
+│   └── index.php
+├── vendor/
+│   └── composer.json
+└── .htaccess
+Файлы конфигурации (config/database.php)
+Здесь хранится информация подключения к БД:
+
+
+<?php
+return [
+    'host' => 'localhost',
+    'dbname' => 'shop_db',
+    'username' => 'root',
+    'password' => '',
+];
+Роутер (public/index.php)
+Этот файл обрабатывает запросы пользователей и перенаправляет их соответствующим контроллерам.
+
+
+<?php
+// Загружаем автозагрузчик классов
+require_once '../vendor/autoload.php';
+
+// Настройка маршрута и инициализация приложения
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$routes = require('../app/routes.php');
+
+if (!isset($routes[$uri])) {
+    header('HTTP/1.1 404 Not Found');
+    exit();
+}
+
+list($controllerClass, $actionMethod) = explode('@', $routes[$uri]);
+
+$controllerInstance = new $controllerClass();
+$controllerInstance->$actionMethod();
+Контроллеры (controllers/*Controller.php)
+Контроллер получает данные от модели и передает их представлению (view). Пример простого HomeController:
+
+
+<?php
+class HomeController
+{
+    public function index()
+    {
+        include __DIR__.'/../views/home/index.php';
+    }
+}
+Пример ProductController, который выводит список товаров:
+
+
+<?php
+use App\Models\Product;
+
+class ProductController
+{
+    private $productModel;
+    
+    public function __construct() {
+        $this->productModel = new Product();
+    }
+
+    // Отображение списка продуктов
+    public function listProducts()
+    {
+        $products = $this->productModel->all();
+        include __DIR__.'/../views/products/list.php';
+    }
+
+    // Просмотр отдельного товара
+    public function showProduct($id)
+    {
+        $product = $this->productModel->findById($id);
+        
+        if (!$product) {
+            http_response_code(404); die("Страница не найдена");
+        }
+
+        include __DIR__.'/../views/products/view.php';
+    }
+}
+Модели (models/*.php)
+Модели работают непосредственно с базой данных и обеспечивают доступ к данным. Пример модели продукта:
+
+
+<?php
+namespace App\Models;
+
+class Product
+{
+    protected static $dbh;
+
+    public function __construct() {
+        self::$dbh = new PDO(
+            'mysql:host='.DB_HOST.';dbname='.DB_NAME,
+            DB_USER,
+            DB_PASS,
+            array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
+        );
+    }
+
+    public function all()
+    {
+        return self::$dbh->query('SELECT * FROM products')->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function findById($id)
+    {
+        $stmt = self::$dbh->prepare('SELECT * FROM products WHERE id=:id');
+        $stmt->execute(['id'=>$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+}
+Представления (views/*)
+Представление — это HTML-шаблон, куда передаются данные от контроллера. Например, шаблон вывода одного товара:
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Продукт № <?=$product['id']?> </title>
+</head>
+<body>
+<h1><?=$product['name']?></h1>
+<p><?=$product['description']?></p>
+<p><strong>Цена:</strong> <?=$product['price']?> руб.</p>
+<a href="/">Вернуться назад</a>
+</body>
+</html>
+Маршрутизация (routes.php)
+Файл маршрутов связывает URI с соответствующими действиями контроллеров:
+
+
+<?php
+return [
+    '/'              => 'App\Controllers\HomeController@index',
+    '/products'      => 'App\Controllers\ProductController@listProducts',
+    '/product/{id}'  => 'App\Controllers\ProductController@showProduct'
+];
+.htaccess
+Чтобы сервер правильно направлял запросы через наш основной роутер (index.php), нужен следующий .htaccess-файл:
+
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)$ /index.php/$1 [L,QSA]
+
+
+
+
+if ($_SESSION['is_admin'] !== true) {
+    http_response_code(403);
+    die("Access denied.");
+}
+
+
+
+
+views/
+├── frontend/                  # Полноценные страницы клиента
+│   ├── pages/                 # Основные страницы
+│   │   ├── index.php          # Главная страница
+│   │   ├── product.php        # Карточка товара
+│   │   └── cart.php           # Корзина покупок
+│   └── layouts/               # Макеты общих частей страницы
+│       ├── base.php           # Основной шаблон страницы
+│       └── sidebar.php        # Боковая панель
+├── backend/                   # Административная часть
+│   ├── dashboard/             # Панель управления
+│   │   └── index.php          # Основное представление панели
+│   └── users/                 # Пользовательские страницы
+│       ├── edit.php           # Редактирование профилей
+│       └── list.php           # Список пользователей
+└── partials/                  # Частичные шаблоны
+    ├── product-list.php       # Цикл списка продуктов
+    ├── form-order.php         # Форма заказа
+    ├── navbar.php             # Навигационная панель
+    └── cart-widget.php        # Виджет корзины
+
+
+
+
+project/
+├── config/               # Конфигурационные файлы
+│   ├── database.php      # Настройки подключения к БД
+│   └── routes.php        # Роуты приложений
+├── controllers/          # Контроллеры
+│   ├── Frontend/         # Контроллеры фронтенд-приложения
+│   │   └── PagesController.php
+│   └── Backend/          # Контроллеры админ-панели
+│       └── DashboardController.php
+├── models/               # Модели базы данных
+│   └── User.php
+├── views/                 # Представления
+│   ├── frontend/         # Шаблоны для публичной части сайта
+│   │   ├── pages/
+│   │   │   └── index.php
+│   │   └── layouts/
+│   │       └── master.php
+│   └── backend/          # Шаблоны для административной панели
+│       ├── dashboard/
+│       │   └── index.php
+│       └── layouts/
+│           └── admin_master.php
+├── bootstrap/            # Загрузка классов и конфигураций
+│   └── autoload.php
+├── public/               # Корневая публичная директория
+│   └── index.php         # Точка входа приложения
+├── db/                   # Папка с базой данных (если используется SQLite)
+├── .htaccess             # Правила перезаписи URL
+└── composer.json         # Composer (необязательно)
+
+
+
+
+classes
+controllers
+database
+images
+models
+scripts
+styles
+views
+config.php
+helpers.php
+index.php
+router.php

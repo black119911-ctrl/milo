@@ -1,0 +1,42 @@
+@import menu
+    
+.header
+    background: $greenColor
+    width: 100%
+    padding: 20px 0
+    &__inner
+        display: flex
+        justify-content: flex-end
+        &-menu
+            position: relative
+            width: 25px
+            height: 18px
+            background: none
+            border: none
+            & span
+                position: absolute
+                width: 100%
+                background: #fff
+                content: ''
+                height: 1px
+                border-radius: 20px
+                top: 0
+                left: 50%
+                transform: translateX(-50%)
+                &:nth-child(2)
+                    top: 9px
+                    left: 0
+                    transform: translateX(0)
+                &:nth-child(3)
+                    top: 18px
+
+@media (max-width: 450px)
+    .header
+        position: fixed
+        width: 55px
+        height: 57px
+        right: 0
+        top: 0
+        border-radius: 10px 0 0 10px
+        &__inner
+            justify-content: center

@@ -1,0 +1,355 @@
+/* ===== DASHBOARD STYLES ===== */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem 1rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    border-left: 4px solid var(--primary-color);
+}
+
+.stat-card.products {
+    border-left-color: var(--success-color);
+}
+
+.stat-card.services {
+    border-left-color: var(--secondary-color);
+}
+
+.stat-card.reviews {
+    border-left-color: var(--warning-color);
+}
+
+.stat-card.promocodes {
+    border-left-color: #7209b7;
+}
+
+.stat-card__number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark-color);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card__label {
+    font-size: 0.875rem;
+    color: var(--gray-color);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.quick-actions {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+}
+
+.quick-actions__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--dark-color);
+}
+
+.action-buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .action-buttons {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+
+/* styles/admin/dashboard.css */
+/* Основные стили уже встроены в dashboard.php */
+/* Этот файл можно использовать для дополнительных стилей */
+
+/* Анимация загрузки */
+@keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+}
+
+.loading {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* Уведомления */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    color: white;
+    font-weight: 500;
+    z-index: 1000;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transform: translateX(120%);
+    transition: transform 0.3s;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification.success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.notification.error {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+.notification.warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+}
+
+/* Модальные окна */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.modal-overlay.show {
+    display: block;
+    opacity: 1;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: var(--shadow-xl);
+    z-index: 2001;
+    max-width: 500px;
+    width: 90%;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.modal.show {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-light);
+    transition: color 0.2s;
+}
+
+.modal-close:hover {
+    color: var(--text-dark);
+}
+
+/* Кастомный скроллбар */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light-bg);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-green);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Адаптивность для таблиц */
+@media (max-width: 640px) {
+    .orders-table {
+        font-size: 14px;
+    }
+    
+    .order-status {
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+    
+    .quick-links {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+.dashboard-container {
+    margin-top: 80px; /* Отступ под фиксированный хедер */
+    padding: 20px;
+}
+
+@media (min-width: 768px) {
+    .dashboard-container {
+        margin-top: 100px;
+        padding: 30px;
+    }
+}
+
+
+/* styles/admin/dashboard.css */
+/* Основные стили уже встроены в dashboard.php */
+/* Этот файл можно использовать для переопределений */
+
+/* Анимация появления карточек */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stat-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.stat-card:nth-child(2) { animation-delay: 0.1s; }
+.stat-card:nth-child(3) { animation-delay: 0.2s; }
+.stat-card:nth-child(4) { animation-delay: 0.3s; }
+
+/* Анимация для быстрых ссылок */
+.quick-link {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.quick-link:nth-child(2) { animation-delay: 0.1s; }
+.quick-link:nth-child(3) { animation-delay: 0.2s; }
+.quick-link:nth-child(4) { animation-delay: 0.3s; }
+.quick-link:nth-child(5) { animation-delay: 0.4s; }
+.quick-link:nth-child(6) { animation-delay: 0.5s; }
+
+/* Кастомный скроллбар */
+.dashboard-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dashboard-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.dashboard-container::-webkit-scrollbar-thumb {
+    background: #105E34;
+    border-radius: 4px;
+}
+
+.dashboard-container::-webkit-scrollbar-thumb:hover {
+    background: #0a4725;
+}
+
+
+/* styles/admin/dashboard.css */
+/* Дополнительные стили для дашборда */
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dashboard-container {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Кастомный скроллбар */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #105E34;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0a4725;
+}
+
+/* Адаптивность для маленьких экранов */
+@media (max-width: 480px) {
+    .quick-links {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .link-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+    
+    .link-title {
+        font-size: 14px;
+    }
+    
+    .link-desc {
+        font-size: 12px;
+    }
+}

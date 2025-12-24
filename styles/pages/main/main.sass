@@ -1,0 +1,58 @@
+@import ../../animations
+@import ../../components/catalog
+
+.first-screen
+    background: url('../../../images/main-bg-full.webp') no-repeat center center
+    background-size: cover
+    width: 100%
+    height: 600px
+    &__inner
+        display: flex
+        justify-content: center
+        align-items: center
+        flex-direction: column
+        padding-top: 100px
+        &-logo
+            margin-bottom: 65px
+            opacity: 0
+            transform: translateY(100%)
+            animation: fadeInUp 1.5s ease .5s forwards
+        &-slogan
+            font-family: "Great Vibes", cursive
+            color: #fff
+            font-size: 70px
+            line-height: 97px
+            text-align: center
+            opacity: 0
+            transform: translateY(100%)
+            animation: fadeInUp 1.5s ease 1s forwards
+
+@media (max-width: 992px)
+    .first-screen
+        &__inner
+            &-slogan
+                font-size: 50px
+                line-height: 1.2
+
+@media (max-width: 576px)
+    .first-screen
+        &__inner
+            &-logo
+                max-width: 200px
+                width: 100%
+                & img
+                    width: 100%
+            &-slogan
+                font-size: 40px
+
+@media (max-width: 410px)
+    .first-screen
+        min-height: 350px
+        height: 100%
+        &__inner
+            padding-top: 70px
+            &-logo
+                max-width: 160px
+                margin-bottom: 30px
+            &-slogan
+                font-size: 35px

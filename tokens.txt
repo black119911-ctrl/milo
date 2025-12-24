@@ -1,0 +1,118 @@
+<?php
+session_start();
+
+// Генерируем токен CSRF при отсутствии существующего
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+// Устанавливаем куку с токеном
+setcookie('csrf_token', $_SESSION['csrf_token'], time() + 3600); // Срок жизни токена 1 час
+?>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Каталог товаров</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Каталог товаров</h1>
+    <div id="products-list">
+        <?php include_once 'catalog.php'; ?>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
+
+
+
+<?php
+// Подразумеваемый массив товаров
+$products = [
+    ["id" => 1, "name" => "Футболка", "price" => 10],
+    ["id" => 2, "name" => "Джинсы", "price" => 20],
+    ["id" => 3, "name" => "Куртка", "price" => 30],
+    // Другие товары
+];
+
+foreach ($products as $product) : ?>
+    <div class="product">
+        <h3><?= $product['name']; ?></h3>
+        <p>Цена: <?= $product['price']; ?> руб.</p>
+        <button data-product-id="<?= $product['id']; ?>">Добавить в корзину</button>
+    </div>
+<?php endforeach; ?>
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Получаем все кнопки добавления в корзину
+    const buttons = document.querySelectorAll('#products-list button');
+
+    buttons.forEach((btn) => {
+        btn.addEventListener('click', async (event) => {
+            event.preventDefault(); // предотвращаем стандартное поведение кнопки
+
+            // Получаем ID товара из атрибутов кнопки
+            const productId = btn.dataset.productId;
+
+            // Токен CSRF берем из куку
+            const csrfToken = document.cookie.split('csrf_token=').pop().split(';')[0]; // Парсим куку
+
+            try {
+                // Готовим тело запроса
+                const formData = new FormData();
+                formData.append('product_id', productId);
+                formData.append('csrf_token', csrfToken);
+
+                // Отправляем запрос через fetch API
+                await fetch('add_to_cart.php', {
+                    method: 'POST',
+                    headers: {},
+                    body: formData
+                });
+
+                alert('Товар успешно добавлен в корзину!');
+            } catch(error) {
+                console.error('Ошибка:', error.message);
+            }
+        });
+    });
+});
+
+
+
+
+<?php
+session_start();
+
+// Проверяем POST-данные
+if (!isset($_POST['product_id'], $_POST['csrf_token']) ||
+    empty($_POST['product_id']) || empty($_POST['csrf_token'])) {
+    die('Недостаточно данных.');
+}
+
+// Проверяем токен CSRF
+if ($_COOKIE['csrf_token'] != $_SESSION['csrf_token']) {
+    die('Неправильный токен CSRF.');
+}
+
+// Логика добавления товара в корзину
+$productId = intval($_POST['product_id']);
+
+// Здесь можно провести дальнейшую логику, например, проверка наличия товара и обновление корзины
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = []; // Инициализируем корзину, если она отсутствует
+}
+
+if (isset($_SESSION['cart'][$productId])) {
+    $_SESSION['cart'][$productId]++; // Увеличим количество товара, если он уже есть в корзине
+} else {
+    $_SESSION['cart'][$productId] = 1; // Добавляем новый товар в корзину
+}
+
+// Можно вернуть какой-нибудь статус или сообщение
+echo json_encode(['message' => 'Товар успешно добавлен в корзину.', 'success' => true]);

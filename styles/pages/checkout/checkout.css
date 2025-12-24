@@ -1,0 +1,754 @@
+.checkout-page {
+  margin-top: 80px;
+  padding: 40px 0;
+  background: #EFEFEF;
+  min-height: 100vh;
+}
+.checkout-page .container {
+  max-width: 1200px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.checkout {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 50px;
+  align-items: start;
+}
+.checkout-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.checkout-title h2 {
+  font-size: 40px;
+  font-weight: 200;
+  color: #105E34;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.order {
+  background: #fff;
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+.order__form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+.order__form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.order__form-label {
+  font-weight: 400;
+  color: #1a1a2e;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+.order .input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: "Geologica", sans-serif;
+  font-weight: 200;
+  transition: all 0.3s ease;
+  background: white;
+}
+.order .input:focus {
+  outline: none;
+  border-color: #105E34;
+  box-shadow: 0 0 0 3px rgba(16, 94, 52, 0.1);
+}
+.order .input.error {
+  border-color: #e74c3c;
+}
+.order__form-submit {
+  margin-top: 20px;
+}
+.order .checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin: 10px 0;
+}
+.order .checkbox-label:hover {
+  background: #f8f9fa;
+}
+.order .checkbox-label.checked {
+  background: #f0f8ff;
+  border-left: 3px solid #105E34;
+}
+.order .checkbox-label input[type=checkbox] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  cursor: pointer;
+  accent-color: #105E34;
+}
+.order .checkbox-label span {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #495057;
+  font-weight: 300;
+}
+.order__form-oferta-link {
+  color: #105E34;
+  text-decoration: none;
+  font-weight: 400;
+}
+.order__form-oferta-link:hover {
+  text-decoration: underline;
+}
+
+.cart-total {
+  background: #fff;
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 20px;
+}
+.cart-total__title {
+  font-size: 24px;
+  font-weight: 200;
+  color: #1a1a2e;
+  margin: 0 0 30px 0;
+  text-align: center;
+}
+.cart-total__list {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 25px;
+}
+.cart-total__list::-webkit-scrollbar {
+  width: 6px;
+}
+.cart-total__list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+.cart-total__list::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+.cart-total__list::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+.cart-total__list-item {
+  display: flex;
+  gap: 15px;
+  padding: 18px 0;
+  border-bottom: 1px solid #f8f9fa;
+}
+.cart-total__list-item:last-child {
+  border-bottom: none;
+}
+.cart-total__list-item-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.cart-total__list-item-img img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.cart-total__list-item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.cart-total__list-item-title {
+  font-weight: 400;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  font-size: 15px;
+}
+.cart-total__list-item-calcs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cart-total__list-item-price {
+  font-weight: 400;
+  color: #1a1a2e;
+  font-size: 15px;
+}
+.cart-total__list-item-price .original-price {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 14px;
+  margin-right: 8px;
+}
+.cart-total__list-item-price .discount-price {
+  color: #e74c3c;
+  font-weight: 600;
+}
+.cart-total__list-item-quant {
+  color: #6c757d;
+  font-size: 14px;
+  font-weight: 300;
+}
+.cart-total__result {
+  margin-bottom: 30px;
+}
+.cart-total__result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e9ecef;
+  font-size: 15px;
+  color: #495057;
+  font-weight: 300;
+}
+.cart-total__result-row.discount {
+  color: #27ae60;
+  font-weight: 400;
+}
+.cart-total__result-row--total {
+  border-bottom: none;
+  border-top: 2px solid #105E34;
+  font-size: 18px;
+  font-weight: 400;
+  color: #1a1a2e;
+  padding-top: 15px;
+  margin-top: 10px;
+}
+.cart-total__result-text {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: 400;
+  color: #1a1a2e;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 2px solid #e9ecef;
+}
+.cart-total__result-back-wrap {
+  text-align: center;
+  margin-top: 20px;
+}
+.cart-total__result-back {
+  color: #105E34;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 300;
+  transition: color 0.3s ease;
+}
+.cart-total__result-back:hover {
+  text-decoration: underline;
+  color: rgb(8.5818181818, 50.4181818182, 27.8909090909);
+}
+
+.promocode {
+  border-top: 1px solid #e9ecef;
+  padding-top: 25px;
+  margin-bottom: 25px;
+}
+.promocode__form {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+.promocode__input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: "Geologica", sans-serif;
+  font-weight: 200;
+  transition: all 0.3s ease;
+}
+.promocode__input:focus {
+  outline: none;
+  border-color: #105E34;
+  box-shadow: 0 0 0 3px rgba(16, 94, 52, 0.1);
+}
+.promocode__btn {
+  padding: 12px 24px;
+  background: #105E34;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+.promocode__btn:hover:not(:disabled) {
+  background: rgb(8.5818181818, 50.4181818182, 27.8909090909);
+  transform: translateY(-1px);
+}
+.promocode__btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+.promocode__message {
+  font-size: 14px;
+  min-height: 20px;
+  text-align: center;
+  font-weight: 300;
+}
+
+.applied-promocode {
+  background: #f8fff9;
+  border: 2px solid #27ae60;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.promocode-success {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #27ae60;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.promocode-remove {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 5px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+.promocode-remove:hover {
+  background: #ffe6e6;
+}
+
+.discount-info {
+  color: #27ae60;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: 300;
+}
+
+#alfa-payment-button {
+  width: 100% !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+#alfa-payment-button.hidden {
+  display: none !important;
+}
+
+#alfa-message {
+  text-align: center;
+  color: #6c757d;
+  font-size: 14px;
+  margin-top: 15px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  font-weight: 300;
+}
+
+.empty-cart {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+.empty-cart-icon {
+  font-size: 80px;
+  margin-bottom: 25px;
+  opacity: 0.7;
+}
+.empty-cart h2 {
+  font-size: 28px;
+  color: #1a1a2e;
+  margin-bottom: 15px;
+  font-weight: 200;
+}
+.empty-cart p {
+  font-size: 16px;
+  color: #6c757d;
+  margin-bottom: 30px;
+  font-weight: 300;
+}
+
+.field-error {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 5px;
+  display: none;
+  font-weight: 300;
+}
+.field-error.show {
+  display: block;
+}
+
+.checkout-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #27ae60;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  z-index: 10000;
+  animation: slideIn 0.3s ease;
+  font-size: 14px;
+  font-weight: 400;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.checkout-notification.error {
+  background: #e74c3c;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@media (max-width: 1024px) {
+  .checkout {
+    grid-template-columns: 1fr 350px;
+    gap: 30px;
+  }
+}
+@media (max-width: 768px) {
+  .checkout-page {
+    margin-top: 60px;
+    padding: 20px 0;
+  }
+  .checkout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .cart-total {
+    position: static;
+  }
+  .order,
+  .cart-total {
+    padding: 30px;
+  }
+  .checkout-title h2 {
+    font-size: 32px;
+  }
+}
+@media (max-width: 576px) {
+  .checkout-page {
+    margin-top: 40px;
+    padding: 15px 0;
+  }
+  .order,
+  .cart-total {
+    padding: 20px;
+    border-radius: 12px;
+  }
+  .checkout-title h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+  .cart-total__list-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+  .cart-total__list-item-img {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+  .cart-total__list-item-calcs {
+    justify-content: center;
+    gap: 20px;
+  }
+  .promocode__form {
+    flex-direction: column;
+  }
+  .checkbox-label {
+    padding: 12px;
+  }
+  .checkbox-label span {
+    font-size: 13px;
+  }
+}
+@media (max-width: 450px) {
+  .checkout-page {
+    margin-top: 20px;
+  }
+  .checkout-page .container {
+    padding: 0;
+  }
+  .order,
+  .cart-total {
+    padding: 15px;
+    border-radius: 10px;
+    margin: 0 10px;
+  }
+  .checkout-title h2 {
+    font-size: 24px;
+  }
+  .cart-total__result-text {
+    font-size: 18px;
+  }
+  #alfa-message {
+    font-size: 13px;
+    padding: 12px;
+  }
+}
+.promocode-club-info {
+  background: linear-gradient(135deg, #fff9e6, #fff3cd);
+  border: 2px solid #ffeaa7;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 15px 0;
+  color: #856404;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+#alfa-payment-button {
+  width: 100% !important;
+  border-radius: 50px !important;
+  overflow: hidden !important;
+  min-height: auto !important;
+  height: auto !important;
+}
+#alfa-payment-button.hidden {
+  display: none !important;
+}
+#alfa-payment-button .apb-button {
+  background: #105E34 !important;
+  border: none !important;
+  border-radius: 50px !important;
+  color: white !important;
+  font-weight: 400 !important;
+  font-size: 15px !important;
+  padding: 12px 30px !important;
+  width: 100% !important;
+  height: 48px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  font-family: "Geologica", sans-serif !important;
+  text-transform: none !important;
+  box-shadow: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+#alfa-payment-button .apb-button:hover {
+  background: rgb(8.5818181818, 50.4181818182, 27.8909090909) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+#alfa-payment-button .apb-button:disabled {
+  background: #6c757d !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+#alfa-payment-button button {
+  background: #105E34 !important;
+  border: none !important;
+  border-radius: 50px !important;
+  color: white !important;
+  font-weight: 400 !important;
+  font-size: 15px !important;
+  padding: 12px 30px !important;
+  width: 100% !important;
+  height: 48px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  font-family: "Geologica", sans-serif !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+#alfa-payment-button button:hover {
+  background: rgb(8.5818181818, 50.4181818182, 27.8909090909) !important;
+  transform: translateY(-1px) !important;
+}
+#alfa-payment-button button:disabled {
+  background: #6c757d !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+#alfa-payment-button iframe {
+  border-radius: 50px !important;
+  overflow: hidden !important;
+  border: none !important;
+  width: 100% !important;
+  height: 48px !important;
+}
+
+#alfa-payment-button [class*=button],
+#alfa-payment-button [class*=btn],
+#alfa-payment-button a[class*=button],
+#alfa-payment-button a[class*=btn] {
+  background: #105E34 !important;
+  border: none !important;
+  border-radius: 50px !important;
+  color: white !important;
+  font-weight: 400 !important;
+  font-size: 15px !important;
+  padding: 12px 30px !important;
+  width: 100% !important;
+  height: 48px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  font-family: "Geologica", sans-serif !important;
+  text-transform: none !important;
+  box-shadow: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  text-decoration: none !important;
+}
+#alfa-payment-button [class*=button]:hover,
+#alfa-payment-button [class*=btn]:hover,
+#alfa-payment-button a[class*=button]:hover,
+#alfa-payment-button a[class*=btn]:hover {
+  background: rgb(8.5818181818, 50.4181818182, 27.8909090909) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+#alfa-payment-button [class*=button]:disabled,
+#alfa-payment-button [class*=btn]:disabled,
+#alfa-payment-button a[class*=button]:disabled,
+#alfa-payment-button a[class*=btn]:disabled {
+  background: #6c757d !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+#alfa-payment-button * {
+  border-radius: 50px !important;
+  overflow: hidden !important;
+}
+
+#alfa-payment-button button,
+#alfa-payment-button .apb-button,
+#alfa-payment-button [class*=button],
+#alfa-payment-button a {
+  border-radius: 50px !important;
+  overflow: hidden !important;
+  background: #105E34 !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 400 !important;
+  font-size: 15px !important;
+  padding: 12px 30px !important;
+  width: 100% !important;
+  height: 48px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  font-family: "Geologica", sans-serif !important;
+  text-transform: none !important;
+  box-shadow: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  text-decoration: none !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+#alfa-payment-button button::before,
+#alfa-payment-button .apb-button::before,
+#alfa-payment-button [class*=button]::before,
+#alfa-payment-button a::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: #105E34 !important;
+  border-radius: 50px !important;
+  z-index: -1 !important;
+}
+#alfa-payment-button button:hover,
+#alfa-payment-button .apb-button:hover,
+#alfa-payment-button [class*=button]:hover,
+#alfa-payment-button a:hover {
+  background: rgb(8.5818181818, 50.4181818182, 27.8909090909) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+#alfa-payment-button button:hover::before,
+#alfa-payment-button .apb-button:hover::before,
+#alfa-payment-button [class*=button]:hover::before,
+#alfa-payment-button a:hover::before {
+  background: rgb(8.5818181818, 50.4181818182, 27.8909090909) !important;
+}
+#alfa-payment-button button:disabled,
+#alfa-payment-button .apb-button:disabled,
+#alfa-payment-button [class*=button]:disabled,
+#alfa-payment-button a:disabled {
+  background: #6c757d !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+#alfa-payment-button button:disabled::before,
+#alfa-payment-button .apb-button:disabled::before,
+#alfa-payment-button [class*=button]:disabled::before,
+#alfa-payment-button a:disabled::before {
+  background: #6c757d !important;
+}
+
+#alfa-payment-button * {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+#alfa-payment-button button, #alfa-payment-button .apb-button, #alfa-payment-button [class*=button] {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+#alfa-payment-button span, #alfa-payment-button div, #alfa-payment-button p {
+  color: white !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  font-family: "Geologica", sans-serif !important;
+  line-height: 1 !important;
+}
+#alfa-payment-button div, #alfa-payment-button span {
+  border-radius: 50px !important;
+  overflow: hidden !important;
+}/*# sourceMappingURL=checkout.css.map */

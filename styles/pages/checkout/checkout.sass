@@ -1,0 +1,732 @@
+// styles/pages/checkout/checkout.sass
+@import ../../base
+
+.checkout-page
+    margin-top: 80px
+    padding: 40px 0
+    background: #EFEFEF
+    min-height: 100vh
+
+    .container
+        max-width: 1200px
+        padding: 0 15px
+        margin: 0 auto
+
+.checkout
+    display: grid
+    grid-template-columns: 1fr 400px
+    gap: 50px
+    align-items: start
+
+    &-title
+        text-align: center
+        margin-bottom: 40px
+        
+        h2
+            font-size: 40px
+            font-weight: 200
+            color: $greenColor
+            margin: 0
+            text-transform: uppercase
+
+// Левая колонка - форма заказа
+.order
+    background: #fff
+    border-radius: 15px
+    padding: 40px
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05)
+
+    &__form
+        display: flex
+        flex-direction: column
+        gap: 25px
+
+    &__form-field
+        display: flex
+        flex-direction: column
+        gap: 10px
+
+    &__form-label
+        font-weight: 400
+        color: #1a1a2e
+        font-size: 15px
+        margin-bottom: 5px
+
+    .input
+        width: 100%
+        padding: 14px 16px
+        border: 2px solid #e9ecef
+        border-radius: 8px
+        font-size: 15px
+        font-family: $mainFont
+        font-weight: 200
+        transition: all 0.3s ease
+        background: white
+
+        &:focus
+            outline: none
+            border-color: $greenColor
+            box-shadow: 0 0 0 3px rgba($greenColor, 0.1)
+
+        &.error
+            border-color: #e74c3c
+
+    &__form-submit
+        margin-top: 20px
+
+    // Стили для галочки согласия
+    .checkbox-label
+        display: flex
+        align-items: flex-start
+        gap: 12px
+        padding: 15px
+        border-radius: 8px
+        transition: all 0.3s ease
+        cursor: pointer
+        margin: 10px 0
+
+        &:hover
+            background: #f8f9fa
+
+        &.checked
+            background: #f0f8ff
+            border-left: 3px solid $greenColor
+
+        input[type="checkbox"]
+            width: 18px
+            height: 18px
+            margin-top: 2px
+            cursor: pointer
+            accent-color: $greenColor
+
+        span
+            font-size: 14px
+            line-height: 1.5
+            color: #495057
+            font-weight: 300
+
+    &__form-oferta-link
+        color: $greenColor
+        text-decoration: none
+        font-weight: 400
+
+        &:hover
+            text-decoration: underline
+
+// Правая колонка - итоги заказа
+.cart-total
+    background: #fff
+    border-radius: 15px
+    padding: 40px
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05)
+    position: sticky
+    top: 20px
+
+    &__title
+        font-size: 24px
+        font-weight: 200
+        color: #1a1a2e
+        margin: 0 0 30px 0
+        text-align: center
+
+    &__list
+        max-height: 400px
+        overflow-y: auto
+        margin-bottom: 25px
+        border-bottom: 1px solid #e9ecef
+        padding-bottom: 25px
+
+        &::-webkit-scrollbar
+            width: 6px
+
+        &::-webkit-scrollbar-track
+            background: #f1f1f1
+            border-radius: 3px
+
+        &::-webkit-scrollbar-thumb
+            background: #c1c1c1
+            border-radius: 3px
+
+        &::-webkit-scrollbar-thumb:hover
+            background: #a8a8a8
+
+    &__list-item
+        display: flex
+        gap: 15px
+        padding: 18px 0
+        border-bottom: 1px solid #f8f9fa
+
+        &:last-child
+            border-bottom: none
+
+    &__list-item-img
+        width: 80px
+        height: 80px
+        border-radius: 8px
+        overflow: hidden
+        flex-shrink: 0
+
+        img
+            width: 100%
+            height: 100%
+            object-fit: cover
+
+    &__list-item-info
+        flex: 1
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+
+    &__list-item-title
+        font-weight: 400
+        color: #1a1a2e
+        margin-bottom: 8px
+        line-height: 1.4
+        font-size: 15px
+
+    &__list-item-calcs
+        display: flex
+        justify-content: space-between
+        align-items: center
+
+    &__list-item-price
+        font-weight: 400
+        color: #1a1a2e
+        font-size: 15px
+
+        .original-price
+            text-decoration: line-through
+            color: #999
+            font-size: 14px
+            margin-right: 8px
+
+        .discount-price
+            color: #e74c3c
+            font-weight: 600
+
+    &__list-item-quant
+        color: #6c757d
+        font-size: 14px
+        font-weight: 300
+
+    &__result
+        margin-bottom: 30px
+
+    &__result-row
+        display: flex
+        justify-content: space-between
+        align-items: center
+        padding: 12px 0
+        border-bottom: 1px solid #e9ecef
+        font-size: 15px
+        color: #495057
+        font-weight: 300
+
+        &.discount
+            color: #27ae60
+            font-weight: 400
+
+        &--total
+            border-bottom: none
+            border-top: 2px solid $greenColor
+            font-size: 18px
+            font-weight: 400
+            color: #1a1a2e
+            padding-top: 15px
+            margin-top: 10px
+
+    &__result-text
+        display: flex
+        justify-content: space-between
+        font-size: 20px
+        font-weight: 400
+        color: #1a1a2e
+        margin-top: 15px
+        padding-top: 15px
+        border-top: 2px solid #e9ecef
+
+    &__result-back-wrap
+        text-align: center
+        margin-top: 20px
+
+    &__result-back
+        color: $greenColor
+        text-decoration: none
+        font-size: 14px
+        font-weight: 300
+        transition: color 0.3s ease
+
+        &:hover
+            text-decoration: underline
+            color: darken($greenColor, 10%)
+
+// Стили для промокода
+.promocode
+    border-top: 1px solid #e9ecef
+    padding-top: 25px
+    margin-bottom: 25px
+
+    &__form
+        display: flex
+        gap: 12px
+        margin-bottom: 15px
+
+    &__input
+        flex: 1
+        padding: 12px 16px
+        border: 2px solid #e9ecef
+        border-radius: 8px
+        font-size: 15px
+        font-family: $mainFont
+        font-weight: 200
+        transition: all 0.3s ease
+
+        &:focus
+            outline: none
+            border-color: $greenColor
+            box-shadow: 0 0 0 3px rgba($greenColor, 0.1)
+
+    &__btn
+        padding: 12px 24px
+        background: $greenColor
+        color: white
+        border: none
+        border-radius: 8px
+        cursor: pointer
+        font-size: 15px
+        font-weight: 400
+        transition: all 0.3s ease
+        white-space: nowrap
+
+        &:hover:not(:disabled)
+            background: darken($greenColor, 10%)
+            transform: translateY(-1px)
+
+        &:disabled
+            background: #6c757d
+            cursor: not-allowed
+            transform: none
+
+    &__message
+        font-size: 14px
+        min-height: 20px
+        text-align: center
+        font-weight: 300
+
+// Стили для примененного промокода
+.applied-promocode
+    background: #f8fff9
+    border: 2px solid #27ae60
+    border-radius: 10px
+    padding: 20px
+    margin: 20px 0
+
+.promocode-success
+    display: flex
+    justify-content: space-between
+    align-items: center
+    color: #27ae60
+    font-weight: 400
+    font-size: 15px
+
+.promocode-remove
+    background: none
+    border: none
+    color: #e74c3c
+    cursor: pointer
+    font-size: 18px
+    padding: 5px
+    border-radius: 4px
+    transition: all 0.3s ease
+
+    &:hover
+        background: #ffe6e6
+
+.discount-info
+    color: #27ae60
+    font-size: 14px
+    margin-top: 10px
+    text-align: center
+    font-weight: 300
+
+// Стили для платежного виджета
+#alfa-payment-button
+    width: 100% !important
+    border-radius: 8px !important
+    overflow: hidden !important
+
+    &.hidden
+        display: none !important
+
+#alfa-message
+    text-align: center
+    color: #6c757d
+    font-size: 14px
+    margin-top: 15px
+    padding: 15px
+    background: #f8f9fa
+    border-radius: 8px
+    border: 1px solid #e9ecef
+    font-weight: 300
+
+// Стили для пустой корзины
+.empty-cart
+    text-align: center
+    padding: 60px 20px
+    background: white
+    border-radius: 15px
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05)
+
+    &-icon
+        font-size: 80px
+        margin-bottom: 25px
+        opacity: 0.7
+
+    h2
+        font-size: 28px
+        color: #1a1a2e
+        margin-bottom: 15px
+        font-weight: 200
+
+    p
+        font-size: 16px
+        color: #6c757d
+        margin-bottom: 30px
+        font-weight: 300
+
+// Стили для ошибок
+.field-error
+    color: #e74c3c
+    font-size: 12px
+    margin-top: 5px
+    display: none
+    font-weight: 300
+
+    &.show
+        display: block
+
+// Стили для уведомлений
+.checkout-notification
+    position: fixed
+    top: 20px
+    right: 20px
+    background: #27ae60
+    color: white
+    padding: 15px 20px
+    border-radius: 8px
+    z-index: 10000
+    animation: slideIn 0.3s ease
+    font-size: 14px
+    font-weight: 400
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15)
+
+    &.error
+        background: #e74c3c
+
+@keyframes slideIn
+    from
+        transform: translateX(100%)
+        opacity: 0
+    to
+        transform: translateX(0)
+        opacity: 1
+
+// Адаптивность
+@media (max-width: 1024px)
+    .checkout
+        grid-template-columns: 1fr 350px
+        gap: 30px
+
+@media (max-width: 768px)
+    .checkout-page
+        margin-top: 60px
+        padding: 20px 0
+
+    .checkout
+        grid-template-columns: 1fr
+        gap: 30px
+
+    .cart-total
+        position: static
+
+    .order,
+    .cart-total
+        padding: 30px
+
+    .checkout-title h2
+        font-size: 32px
+
+@media (max-width: 576px)
+    .checkout-page
+        margin-top: 40px
+        padding: 15px 0
+
+    .order,
+    .cart-total
+        padding: 20px
+        border-radius: 12px
+
+    .checkout-title h2
+        font-size: 28px
+        margin-bottom: 30px
+
+    .cart-total__list-item
+        flex-direction: column
+        text-align: center
+        gap: 12px
+
+    .cart-total__list-item-img
+        width: 100px
+        height: 100px
+        margin: 0 auto
+
+    .cart-total__list-item-calcs
+        justify-content: center
+        gap: 20px
+
+    .promocode__form
+        flex-direction: column
+
+    .checkbox-label
+        padding: 12px
+
+        span
+            font-size: 13px
+
+@media (max-width: 450px)
+    .checkout-page
+        margin-top: 20px
+
+        .container
+            padding: 0
+
+    .order,
+    .cart-total
+        padding: 15px
+        border-radius: 10px
+        margin: 0 10px
+
+    .checkout-title h2
+        font-size: 24px
+
+    .cart-total__result-text
+        font-size: 18px
+
+    #alfa-message
+        font-size: 13px
+        padding: 12px
+
+// Стили для клубной информации
+.promocode-club-info
+    background: linear-gradient(135deg, #fff9e6, #fff3cd)
+    border: 2px solid #ffeaa7
+    border-radius: 10px
+    padding: 15px
+    margin: 15px 0
+    color: #856404
+    text-align: center
+    font-size: 14px
+    font-weight: 400
+
+// Стили для кнопки виджета Альфа-Банка
+#alfa-payment-button
+    width: 100% !important
+    border-radius: 50px !important
+    overflow: hidden !important
+    min-height: auto !important
+    height: auto !important
+
+    &.hidden
+        display: none !important
+
+    // Стили для кнопки внутри виджета
+    .apb-button
+        background: $greenColor !important
+        border: none !important
+        border-radius: 50px !important
+        color: white !important
+        font-weight: 400 !important
+        font-size: 15px !important
+        padding: 12px 30px !important
+        width: 100% !important
+        height: 48px !important
+        cursor: pointer !important
+        transition: all 0.3s ease !important
+        font-family: $mainFont !important
+        text-transform: none !important
+        box-shadow: none !important
+        display: flex !important
+        align-items: center !important
+        justify-content: center !important
+        line-height: 1 !important
+        margin: 0 !important
+
+        &:hover
+            background: darken($greenColor, 10%) !important
+            transform: translateY(-1px) !important
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important
+
+        &:disabled
+            background: #6c757d !important
+            cursor: not-allowed !important
+            transform: none !important
+            box-shadow: none !important
+
+    // Альтернативные селекторы
+    button
+        background: $greenColor !important
+        border: none !important
+        border-radius: 50px !important
+        color: white !important
+        font-weight: 400 !important
+        font-size: 15px !important
+        padding: 12px 30px !important
+        width: 100% !important
+        height: 48px !important
+        cursor: pointer !important
+        transition: all 0.3s ease !important
+        font-family: $mainFont !important
+        line-height: 1 !important
+        margin: 0 !important
+
+        &:hover
+            background: darken($greenColor, 10%) !important
+            transform: translateY(-1px) !important
+
+        &:disabled
+            background: #6c757d !important
+            cursor: not-allowed !important
+            transform: none !important
+
+// Если виджет создает iframe
+#alfa-payment-button iframe
+    border-radius: 50px !important
+    overflow: hidden !important
+    border: none !important
+    width: 100% !important
+    height: 48px !important
+
+// Дополнительные селекторы для лучшего охвата
+#alfa-payment-button [class*="button"],
+#alfa-payment-button [class*="btn"],
+#alfa-payment-button a[class*="button"],
+#alfa-payment-button a[class*="btn"]
+    background: $greenColor !important
+    border: none !important
+    border-radius: 50px !important
+    color: white !important
+    font-weight: 400 !important
+    font-size: 15px !important
+    padding: 12px 30px !important
+    width: 100% !important
+    height: 48px !important
+    cursor: pointer !important
+    transition: all 0.3s ease !important
+    font-family: $mainFont !important
+    text-transform: none !important
+    box-shadow: none !important
+    display: flex !important
+    align-items: center !important
+    justify-content: center !important
+    line-height: 1 !important
+    margin: 0 !important
+    text-decoration: none !important
+
+    &:hover
+        background: darken($greenColor, 10%) !important
+        transform: translateY(-1px) !important
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important
+
+    &:disabled
+        background: #6c757d !important
+        cursor: not-allowed !important
+        transform: none !important
+        box-shadow: none !important
+
+// АГРЕССИВНЫЕ СТИЛИ ДЛЯ ИДЕАЛЬНЫХ КРАЕВ
+#alfa-payment-button *
+    border-radius: 50px !important
+    overflow: hidden !important
+
+#alfa-payment-button button,
+#alfa-payment-button .apb-button,
+#alfa-payment-button [class*="button"],
+#alfa-payment-button a
+    border-radius: 50px !important
+    overflow: hidden !important
+    background: $greenColor !important
+    border: none !important
+    color: white !important
+    font-weight: 400 !important
+    font-size: 15px !important
+    padding: 12px 30px !important
+    width: 100% !important
+    height: 48px !important
+    cursor: pointer !important
+    transition: all 0.3s ease !important
+    font-family: $mainFont !important
+    text-transform: none !important
+    box-shadow: none !important
+    display: flex !important
+    align-items: center !important
+    justify-content: center !important
+    line-height: 1 !important
+    margin: 0 !important
+    text-decoration: none !important
+    position: relative !important
+    z-index: 1 !important
+
+    &::before
+        content: '' !important
+        position: absolute !important
+        top: 0 !important
+        left: 0 !important
+        right: 0 !important
+        bottom: 0 !important
+        background: $greenColor !important
+        border-radius: 50px !important
+        z-index: -1 !important
+
+    &:hover
+        background: darken($greenColor, 10%) !important
+        transform: translateY(-1px) !important
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important
+
+        &::before
+            background: darken($greenColor, 10%) !important
+
+    &:disabled
+        background: #6c757d !important
+        cursor: not-allowed !important
+        transform: none !important
+        box-shadow: none !important
+
+        &::before
+            background: #6c757d !important
+
+
+// ТОЧЕЧНЫЕ ИСПРАВЛЕНИЯ ДЛЯ КОНКРЕТНЫХ ЭЛЕМЕНТОВ
+#alfa-payment-button
+    // Исправляем внутренние отступы
+    * 
+        padding: 0 !important
+        margin: 0 !important
+    
+    // Исправляем границы
+    button, .apb-button, [class*="button"]
+        border: none !important
+        outline: none !important
+        box-shadow: none !important
+    
+    // Исправляем текст
+    span, div, p
+        color: white !important
+        font-size: 15px !important
+        font-weight: 400 !important
+        font-family: $mainFont !important
+        line-height: 1 !important
+    
+    // Исправляем контейнеры
+    div, span
+        border-radius: 50px !important
+        overflow: hidden !important

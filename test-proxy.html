@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Alfa Bank Proxy</title>
+</head>
+<body>
+    <h1>Test Alfa Bank Proxy</h1>
+    <button onclick="testProxy()">Test Proxy</button>
+    <div id="result"></div>
+
+    <script>
+        async function testProxy() {
+            const testData = {
+                amount: 1000,
+                description: "Test order",
+                clientName: "Test Client",
+                clientEmail: "test@example.com"
+            };
+
+            try {
+                const response = await fetch('/proxy-payment.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testData)
+                });
+
+                const result = await response.json();
+                document.getElementById('result').innerHTML = 
+                    '<pre>' + JSON.stringify(result, null, 2) + '</pre>';
+                
+                console.log('Proxy test result:', result);
+            } catch (error) {
+                console.error('Proxy test error:', error);
+                document.getElementById('result').innerHTML = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

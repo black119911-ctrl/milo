@@ -1,0 +1,56 @@
+/* Product Page Animations */
+.product__main-info-addtocart {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.product__main-info-addtocart:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.product__button--added {
+    background: #27ae60 !important;
+    transform: scale(1.05);
+}
+
+.product__button--added::after {
+    content: '✓';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+}
+
+/* Анимации для уведомлений */
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+    from { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(100%); opacity: 0; }
+}
+
+/* Минимальные стили для кнопки */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+}
