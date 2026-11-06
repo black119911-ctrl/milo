@@ -44,8 +44,22 @@ function is_active_class($path)
 {
     $request_uri = $_SERVER['REQUEST_URI'];
     $url_parts = parse_url($request_uri);
-    $clean_request_uri = $url_parts['path'];
-    return ($clean_request_uri === $path && strpos($clean_request_uri, $path) === 0) ? 'active' : '';
+    $current_path = rtrim($url_parts['path'], '/') ?: '/';
+    $menu_path = rtrim($path, '/') ?: '/';
+
+    // Точное совпадение путей (с учётом возможного слэша в конце)
+    if ($current_path === $menu_path) {
+        return 'active';
+    }
+
+    // Подсвечиваем пункт меню и для вложенных страниц:
+    // например, /cart/data делает активным пункт /cart,
+    // но корень '/' не совпадает с произвольным путём.
+    if ($menu_path !== '/' && strpos($current_path . '/', $menu_path . '/') === 0) {
+        return 'active';
+    }
+
+    return '';
 }
 
 
